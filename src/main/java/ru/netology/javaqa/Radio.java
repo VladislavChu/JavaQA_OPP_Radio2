@@ -1,21 +1,38 @@
 package ru.netology.javaqa;
 
 public class Radio {
-
-    private int currentRadioStationNumber;
     private int maxStation = 9;
     private int minStation = 0;
-    private int currentVolume;
+    private int currentRadioStationNumber = minStation;
+    private int maxVolume = 100;
+    private int minVolume = 0;
+    private int currentVolume = minVolume;
+
+    public Radio(int maxStation) {
+        this.maxStation = maxStation - 1;
+    }
+
+    public Radio(){
+
+    }
 
     public int getCurrentRadioStationNumber() {
         return currentRadioStationNumber;
     }
 
+    public int getMaxStation() {
+        return maxStation;
+    }
+
+    public int getMinStation() {
+        return minStation;
+    }
+
     public void setCurrentRadioStationNumber(int newCurrentRadioStationNumber) {
-        if (newCurrentRadioStationNumber < 0) {
+        if (newCurrentRadioStationNumber < minStation) {
             return;
         }
-        if (newCurrentRadioStationNumber > 9) {
+        if (newCurrentRadioStationNumber > maxStation) {
             return;
         }
         currentRadioStationNumber = newCurrentRadioStationNumber;
@@ -25,11 +42,19 @@ public class Radio {
         return currentVolume;
     }
 
+    //public int getMaxVolume() {
+    //    return maxVolume;
+    //}
+
+    //public int getMinVolume(){
+    //    return minVolume;
+    //}
+
     public void setCurrentVolume(int newCurrentVolume) {
-        if (newCurrentVolume < 0) {
+        if (newCurrentVolume < minVolume) {
             return;
         }
-        if (newCurrentVolume > 10) {
+        if (newCurrentVolume > maxVolume) {
             return;
         }
         currentVolume = newCurrentVolume;
@@ -55,13 +80,13 @@ public class Radio {
     }
 
     public void increaseVolume() {
-        if (currentVolume < 10) {
+        if (currentVolume < maxVolume) {
             currentVolume++;
         }
     }
 
     public void decreaseVolume() {
-        if (currentVolume > 0) {
+        if (currentVolume > minVolume) {
             currentVolume--;
         }
     }
