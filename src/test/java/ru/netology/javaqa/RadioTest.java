@@ -1,12 +1,10 @@
 package ru.netology.javaqa;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 public class RadioTest {
-
 
     @ParameterizedTest
     @CsvSource({
@@ -19,97 +17,87 @@ public class RadioTest {
             "8,8",
     })
     public void InBorderAndAboveBelowStationNumValue(int expected, int stationNum) {
-        Radio radio = new Radio();
-        radio.setCurrentRadioStationNumber(stationNum);
+        Radio radioStationNumber = new Radio();
+        radioStationNumber.setCurrentRadioStationNumber(stationNum);
 
-        int actual = radio.getCurrentRadioStationNumber();
+        int actual = radioStationNumber.getCurrentRadioStationNumber();
 
         Assertions.assertEquals(expected, actual);
     }
 
-    @Test
-    public void IfUserSetMaxStation() {
-        Radio radio = new Radio(45);
-
-        Assertions.assertEquals(0, radio.getMinStation());
-        Assertions.assertEquals(44, radio.getMaxStation());
-    }
-
     @ParameterizedTest
     @CsvSource({
-            "15,14",
+            "6,5",
+            "0,9",
+            "9,8",
             "1,0",
-            "2,1",
-            "29,28",
-            "28,27",
-            "0,29"
+            "2,1"
     })
-    public void shouldNextRadioStationIfBorderValue(int expected, int stationNum) {
-        Radio radio = new Radio(30);
-        radio.setCurrentRadioStationNumber(stationNum);
+    public void shouldNextRadioStationIfBorderValue(int expected, int station) {
+        Radio radioStation = new Radio();
+        radioStation.setCurrentRadioStationNumber(station);
 
-        radio.nextRadioStationNumber();
+        radioStation.nextRadioStationNumber();
 
-        int actual = radio.getCurrentRadioStationNumber();
+        int actual = radioStation.getCurrentRadioStationNumber();
 
         Assertions.assertEquals(expected, actual);
     }
 
     @ParameterizedTest
     @CsvSource({
-            "14,15",
-            "29,0",
+            "4,5",
+            "9,0",
+            "8,9",
             "0,1",
-            "1,2",
-            "28,29",
-            "27,28"
+            "1,2"
     })
-    public void shouldPrevRadioStationIfBorderValue(int expected, int stationNum) {
-        Radio radio = new Radio(30);
-        radio.setCurrentRadioStationNumber(stationNum);
+    public void shouldPrevRadioStationIfBorderValue(int expected, int station) {
+        Radio radioStation = new Radio();
+        radioStation.setCurrentRadioStationNumber(station);
 
-        radio.prevRadioStationNumber();
+        radioStation.prevRadioStationNumber();
 
-        int actual = radio.getCurrentRadioStationNumber();
+        int actual = radioStation.getCurrentRadioStationNumber();
 
         Assertions.assertEquals(expected, actual);
     }
 
     @ParameterizedTest
     @CsvSource({
-            "50,50",
-            "0,0",
+            "0,-1",
+            "5,5",
+            "0, 11",
             "1,1",
-            "99,99",
-            "100,100",
-            "0,101",
-            "0,-1"
+            "0,0",
+            "9,9",
+            "10,10",
     })
     public void inBorderAndAboveBelowBorderVolume(int expected, int volumeVal) {
-        Radio radio = new Radio();
-        radio.setCurrentVolume(volumeVal);
+        Radio volume = new Radio();
+        volume.setCurrentVolume(volumeVal);
 
-        int actual = radio.getCurrentVolume();
+        int actual = volume.getCurrentVolume();
 
         Assertions.assertEquals(expected, actual);
     }
 
     @ParameterizedTest
     @CsvSource({
-            "51,50",
+            "6,5",
             "1,0",
             "2,1",
-            "99,98",
-            "100,99",
-            "100,100"
+            "9,8",
+            "10,9",
+            "10,10"
     })
     public void shouldToIncreaseVolume(int expected, int volumeVal) {
-        Radio radio = new Radio();
-        radio.setCurrentVolume(volumeVal);
+        Radio volume = new Radio();
+        volume.setCurrentVolume(volumeVal);
 
-        radio.increaseVolume();
+        volume.increaseVolume();
 
-        int actual = radio.getCurrentVolume();
+        int actual = volume.getCurrentVolume();
 
         Assertions.assertEquals(expected, actual);
     }
@@ -118,18 +106,17 @@ public class RadioTest {
     @CsvSource({
             "0,0",
             "0,1",
-            "1,2",
-            "50,51",
-            "99,100",
-            "98,99"
+            "4,5",
+            "9,10",
+            "8,9"
     })
     public void shouldToDecreaseVolume(int expected, int volumeVal) {
-        Radio radio = new Radio();
-        radio.setCurrentVolume(volumeVal);
+        Radio volume = new Radio();
+        volume.setCurrentVolume(volumeVal);
 
-        radio.decreaseVolume();
+        volume.decreaseVolume();
 
-        int actual = radio.getCurrentVolume();
+        int actual = volume.getCurrentVolume();
 
         Assertions.assertEquals(expected, actual);
     }
